@@ -4,10 +4,12 @@ import com.mufanz.chat.ui.util.DateUtil;
 import com.mufanz.chat.ui.util.Ids;
 import com.mufanz.chat.ui.view.chat.data.RemindCount;
 import com.mufanz.chat.ui.view.chat.data.TalkBoxData;
+import com.mufanz.chat.ui.view.chat.data.TalkData;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 
 import java.util.Date;
@@ -29,6 +31,8 @@ public class ElementTalk {
     private Label msgData;   // 信息时间
     private Label msgRemind; // 消息提醒
     private Button delete;   // 删除对话框按钮
+
+    private ListView<Pane> infoBoxList;
 
     public ElementTalk(String talkId, Integer talkType, String talkName, String talkHead, String talkSketch, Date talkDate) {
         pane = new Pane();
@@ -96,10 +100,21 @@ public class ElementTalk {
         delete.getStyleClass().add("element_delete");
         children.add(delete);
 
+        //消息框初始化，点击按钮填充
+        infoBoxList = new ListView<>();
+        infoBoxList.setId(Ids.ElementTalkId.createInfoBoxListId(talkId));
+        infoBoxList.setUserData(new TalkData(talkName, talkHead));
+        infoBoxList.setPrefSize(850, 560);
+        infoBoxList.getStyleClass().add("infoBoxStyle");
+
     }
 
     public Pane pane() {
         return pane;
+    }
+
+    public ListView<Pane> infoBoxList() {
+        return infoBoxList;
     }
 
     public Button delete() {

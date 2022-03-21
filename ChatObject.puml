@@ -35,4 +35,8 @@ class ChatEventDefine{
     -barChat() : 聊天界面
     -barFriend() :好友按钮
 }
+
+
+class ElementTalk{
+}
 @enduml
